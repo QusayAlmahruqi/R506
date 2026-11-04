@@ -3,8 +3,11 @@
 <head><title>Exercice 1</title></head>
 <body>
 <h2>Ex 1 Géolocalisation</h2>
-<button onclick="getPosition()">My position</button>
+<button onclick="getPosition()">ma position</button>
 <p id="resultat"></p>
+
+<button onclick="suivre()">Suivre ma position</button>
+<p id="suivi"></p>
 
 <script>
     //to get the current gps position 
@@ -12,9 +15,9 @@ function getPosition() {
     navigator.geolocation.getCurrentPosition(afficher);
 }
     //to display the location information
-function afficher(p) {
+function afficher(p, id = "resultat") {
     let c = p.coords;
-    document.getElementById("resultat").innerHTML =
+    document.getElementById(id).innerHTML =
         "Latitude : " + c.latitude + "<br>" +
         "Longitude : " + c.longitude + "<br>" +
         "Altitude : " + c.altitude + "<br>" +
@@ -22,6 +25,15 @@ function afficher(p) {
         "Vitesse : " + c.speed + "<br>" +
         "Date : " + new Date(p.timestamp).toLocaleString();
 }
+
+
+// Follow the GPS position
+function suivre() {
+    navigator.geolocation.watchPosition(function(p) {
+        afficher(p, "suivi");
+    });
+}
+
 </script>
 </body>
 </html>
