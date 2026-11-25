@@ -51,9 +51,20 @@ camera.position.z = 5;
 function animate() {
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
-    if (robot) robot.rotation.y += 0.01;
     renderer.render(scene, camera);
 }
 
 renderer.setAnimationLoop(animate);
 
+
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/API/Window/deviceorientation_event
+
+//to be able to control robot with phone orientation
+window.addEventListener("deviceorientation", function(e) {
+    if (robot && e.beta !== null && e.gamma !== null) {
+        robot.rotation.x = e.beta * Math.PI / 180;
+        robot.rotation.y = e.gamma * Math.PI / 180;
+    }
+});

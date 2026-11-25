@@ -1,6 +1,6 @@
 
 <!-- Source: https://threejs.org/manual/pages/installation.html -->
- 
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,5 +18,16 @@
 </head>
 <body>
     <script type="module" src="main.js"></script>
+
+    <button onclick="activerCapteurs()">Activer capteurs</button>
+<script>
+async function activerCapteurs() {
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+        await DeviceOrientationEvent.requestPermission();
+    }
+}
+</script>
+
+
 </body>
 </html>
